@@ -1,0 +1,15 @@
+{
+    "name": "agustn/php",
+    "autoload": {
+        "psr-4": {
+            "Libs\\": "Libs/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Agustin",
+            "email": "agustin110399@gmail.com"
+        }
+    ],
+    "require": {}
+}
