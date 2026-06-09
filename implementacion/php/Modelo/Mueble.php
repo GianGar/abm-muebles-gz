@@ -1,176 +1,75 @@
 <?php
-require_once __DIR__ . '/Categoria.php';
-
 class Mueble
 {
-    private $id_mueble;
+    private $id;
     private $descripcion;
-    private $categoria;
+    private $categoria;   // objeto Categoria
     private $ancho;
     private $alto;
     private $largo;
     private $peso;
-    private $pdo;
 
-    public function __construct($pdo)
+    public function getId()
     {
-        $this->pdo = $pdo;
+        return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
-    // Getters
-    public function obtenerId()
-    {
-        return $this->id_mueble;
-    }
-    public function obtenerDescripcion()
+    public function getDescripcion()
     {
         return $this->descripcion;
     }
-    public function obtenerCategoria()
-    {
-        return $this->categoria;
-    }
-    public function obtenerAncho()
-    {
-        return $this->ancho;
-    }
-    public function obtenerAlto()
-    {
-        return $this->alto;
-    }
-    public function obtenerLargo()
-    {
-        return $this->largo;
-    }
-    public function obtenerPeso()
-    {
-        return $this->peso;
-    }
-
-    // Setters
-    public function establecerId($id)
-    {
-        $this->id_mueble = $id;
-    }
-    public function establecerDescripcion($desc)
+    public function setDescripcion($desc)
     {
         $this->descripcion = $desc;
     }
-    public function establecerCategoria($cat)
+
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+    public function setCategoria($cat)
     {
         $this->categoria = $cat;
     }
-    public function establecerAncho($ancho)
+
+    public function getAncho()
+    {
+        return $this->ancho;
+    }
+    public function setAncho($ancho)
     {
         $this->ancho = $ancho;
     }
-    public function establecerAlto($alto)
+
+    public function getAlto()
+    {
+        return $this->alto;
+    }
+    public function setAlto($alto)
     {
         $this->alto = $alto;
     }
-    public function establecerLargo($largo)
+
+    public function getLargo()
+    {
+        return $this->largo;
+    }
+    public function setLargo($largo)
     {
         $this->largo = $largo;
     }
-    public function establecerPeso($peso)
+
+    public function getPeso()
+    {
+        return $this->peso;
+    }
+    public function setPeso($peso)
     {
         $this->peso = $peso;
-    }
-
-    // Obtener todos los muebles
-    public static function obtenerTodos($pdo)
-    {
-        $stmt = $pdo->query("
-            SELECT m.*, c.nombre as categoria_nombre 
-            FROM mueble m 
-            JOIN categoria c ON m.id_categoria = c.id_categoria 
-            ORDER BY m.id_mueble DESC
-        ");
-        $muebles = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $m = new Mueble($pdo);
-            $m->establecerId($row['id_mueble']);
-            $m->establecerDescripcion($row['descripcion']);
-            $m->establecerAncho($row['ancho']);
-            $m->establecerAlto($row['alto']);
-            $m->establecerLargo($row['largo']);
-            $m->establecerPeso($row['peso']);
-
-            $cat = new Categoria($pdo);
-            $cat->establecerId($row['id_categoria']);
-            $cat->establecerNombre($row['categoria_nombre']);
-            $m->establecerCategoria($cat);
-
-            $muebles[] = $m;
-        }
-        return $muebles;
-    }
-
-    // Obtener un mueble por ID
-    public static function obtenerPorId($pdo, $id)
-    {
-        $stmt = $pdo->prepare("
-            SELECT m.*, c.nombre as categoria_nombre 
-            FROM mueble m 
-            JOIN categoria c ON m.id_categoria = c.id_categoria 
-            WHERE m.id_mueble = ?
-        ");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            $m = new Mueble($pdo);
-            $m->establecerId($row['id_mueble']);
-            $m->establecerDescripcion($row['descripcion']);
-            $m->establecerAncho($row['ancho']);
-            $m->establecerAlto($row['alto']);
-            $m->establecerLargo($row['largo']);
-            $m->establecerPeso($row['peso']);
-
-            $cat = new Categoria($pdo);
-            $cat->establecerId($row['id_categoria']);
-            $cat->establecerNombre($row['categoria_nombre']);
-            $m->establecerCategoria($cat);
-
-            return $m;
-        }
-        return null;
-    }
-
-    public function guardar()
-    {
-        $sql = "INSERT INTO mueble (descripcion, id_categoria, ancho, alto, largo, peso) 
-            VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $this->obtenerDescripcion(),
-            $this->obtenerCategoria()->obtenerId(),
-            $this->obtenerAncho(),
-            $this->obtenerAlto(),
-            $this->obtenerLargo(),
-            $this->obtenerPeso()
-        ]);
-    }
-
-    public function actualizar()
-    {
-        $sql = "UPDATE mueble SET descripcion=?, id_categoria=?, ancho=?, alto=?, largo=?, peso=? WHERE id_mueble=?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $this->obtenerDescripcion(),
-            $this->obtenerCategoria()->obtenerId(),
-            $this->obtenerAncho(),
-            $this->obtenerAlto(),
-            $this->obtenerLargo(),
-            $this->obtenerPeso(),
-            $this->obtenerId()
-        ]);
-    }
-
-    public function eliminar()
-    {
-        $sql = "DELETE FROM mueble WHERE id_mueble = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([$this->obtenerId()]);
     }
 }
 ?>

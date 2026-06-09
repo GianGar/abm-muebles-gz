@@ -9,9 +9,6 @@ switch ($accion) {
     case 'guardar':
         $controller->guardar();
         break;
-    case 'actualizar':
-        $controller->actualizar();
-        break;
     case 'eliminar':
         $id = $_GET['id'] ?? 0;
         $controller->eliminar($id);
@@ -20,7 +17,10 @@ switch ($accion) {
         $id = $_GET['id'] ?? 0;
         $controller->obtenerMueble($id);
         break;
+    case 'actualizar':
+        $controller->actualizar();
+        break;
     default:
-        $controller->panelAdmin();  
+        $controller->panelAdmin();
 }
 ?>

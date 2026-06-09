@@ -1,29 +1,22 @@
 <?php
 class Categoria
 {
-    private $id_categoria;
+    private $id;
     private $nombre;
-    private $pdo;
 
-    public function __construct($pdo)
+    public function getId()
     {
-        $this->pdo = $pdo;
+        return $this->id;
     }
-
-    public function obtenerId()
+    public function setId($id)
     {
-        return $this->id_categoria;
+        $this->id = $id;
     }
-    public function establecerId($id)
-    {
-        $this->id_categoria = $id;
-    }
-
-    public function obtenerNombre()
+    public function getNombre()
     {
         return $this->nombre;
     }
-    public function establecerNombre($nombre)
+    public function setNombre($nombre)
     {
         $this->nombre = $nombre;
     }
