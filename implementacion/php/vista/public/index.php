@@ -15,6 +15,7 @@
     <div class="container">
         <span class="navbar-brand h1">Ambiente Muebles</span>
     </div>
+    <a href="admin.php" class="btn btn-outline-light btn-sm">Administrador</a>
 </nav>
 
 <div class="container my-5">
