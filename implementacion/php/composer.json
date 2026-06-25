@@ -1,0 +1,11 @@
+{
+    "name": "abm/muebles",
+    "description": "Trabajo práctico de gestión de catálogo de muebles",
+    "autoload": {
+        "classmap": [
+            "controladores/",
+            "mapeadores/"
+        ]
+    },
+    "require": {}
+}

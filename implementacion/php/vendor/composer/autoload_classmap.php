@@ -7,4 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Conexion' => $baseDir . '/mapeadores/Conexion.php',
+    'MuebleControlador' => $baseDir . '/controladores/MuebleControlador.php',
+    'MuebleMapeador' => $baseDir . '/mapeadores/MuebleMapeador.php',
 );
